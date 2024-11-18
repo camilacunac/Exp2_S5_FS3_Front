@@ -1,0 +1,63 @@
+<div class="container-fluid d-flex p-5 justify-content-center">
+  <div class="container rounded p-0 row">
+    <div
+      class="col-lg-6 col-md-12 d-flex flex-column justify-content-center align-items-center p-4"
+    >
+      <h2>Iniciar Sesión</h2>
+      <form class="w-100" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <div class="form-group">
+          <label for="loginEmail">Correo Electrónico</label>
+          <input
+            type="email"
+            id="loginEmail"
+            formControlName="email"
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="loginPassword">Contraseña</label>
+          <input
+            type="password"
+            id="loginPassword"
+            formControlName="password"
+            class="form-control mt-2"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-4 w-100">
+          Iniciar Sesión
+        </button>
+      </form>
+      <div *ngIf="loginError" class="text-danger mt-2">
+        Correo o contraseña incorrectos.
+      </div>
+    </div>
+    <div
+      class="col-lg-6 col-md-12 d-flex justify-content-center align-items-center flex-column background-primary"
+    >
+      <img
+        src="./assets/logo.webp"
+        width="250"
+        height="250"
+        class="rounded-circle"
+        alt="logo"
+      />
+      <h3 class="text-white text-bold mt-4">Bienvenido a Dolce Aroma</h3>
+      <p class="lead text-white">
+        Inicia sesión para acceder a tu cuenta y descubrir un mundo de
+        fragancias únicas. En Dolce Aroma, creemos que cada esencia cuenta una
+        historia y que encontrar la fragancia perfecta es parte de tu estilo.
+        Explora nuestras colecciones exclusivas y deja que el aroma ideal te
+        acompañe en cada momento.
+      </p>
+      <span class="lead text-white"
+        ><a class="text-white text-bold" href="recuperar-contraseña"
+          >¿Olvidaste tu contraseña?</a
+        >
+        No te preocupes, puedes recuperarla fácilmente para que sigas
+        disfrutando de una experiencia personalizada.</span
+      >
+    </div>
+  </div>
+</div>
