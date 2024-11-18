@@ -1,1 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    background: #f8f9fa
+}
+
+.navbar{
+    background: black !important;
+}
+
+.navbar li a{
+    font-size: large;
+    color: white;   
+    font-weight: bold;    
+}
+
+.navbar li a:hover{
+    color: #007bff;       
+}
+
+.color-primary{
+   color:  #007bff
+}
+.background-primary{
+    background:#6f42c1
+}
+.color-secondary{
+    color:  #6f42c1
+}
+.background-secondary{
+    background:#007bff
+}
+
+.color-terciary{
+    color:  #f8f9fa
+}
+.background-terciary{
+    background:#f8f9fa
+}
