@@ -10,6 +10,8 @@ import { Component } from '@angular/core';
 })
 export class NavBarComponent {
   isLoggedIn: boolean = localStorage.getItem('isLoggedIn') === 'true';
+  isAdmin: boolean =
+    localStorage.getItem('currentUser')?.includes('admin') || false;
 
   toggleLogin() {
     if (this.isLoggedIn) {

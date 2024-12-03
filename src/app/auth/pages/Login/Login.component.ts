@@ -31,17 +31,24 @@ export class LoginComponent {
     });
   }
 
-  onLogin() {
+  async onLogin() {
     const { email, password } = this.loginForm.value;
-    const user = this.userService
-      .getUsers()
-      .find((u) => u.email === email && u.password === password);
 
-    if (user) {
-      localStorage.setItem('isLoggedIn', 'true');
-      this.userService.setCurrentUser(user);
-      this.router.navigate(['/']);
-    } else {
+    try {
+      const response = await this.userService.login({
+        correo: email,
+        contrasena: password,
+      });
+
+      if (response.state === 'success') {
+        localStorage.setItem('isLoggedIn', 'true');
+        this.userService.setCurrentUser(response.res);
+        this.router.navigate(['/']);
+      } else {
+        this.loginError = true;
+      }
+    } catch (error: any) {
+      console.error('Error durante el login:', error);
       this.loginError = true;
     }
   }

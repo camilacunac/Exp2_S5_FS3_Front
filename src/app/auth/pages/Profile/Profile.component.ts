@@ -1,7 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { UsersService } from '../../services/users.service';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { NavBarComponent } from '../../../commons/components/NavBar/NavBar.component';
 
 @Component({
@@ -16,11 +21,11 @@ export class ProfileComponent {
 
   constructor(private fb: FormBuilder, private userService: UsersService) {
     this.profileForm = this.fb.group({
-      email: [{ value: '', disabled: true }],
-      nombre: [''],
-      apellido: [''],
-      direccion: [''],
-      telefono: [''],
+      correo: [{ value: '', disabled: true }], // Correo no es requerido ya que está deshabilitado
+      nombre: ['', Validators.required],
+      apellido: ['', Validators.required],
+      direccion: ['', Validators.required],
+      telefono: ['', [Validators.required, Validators.pattern('\\d{9,}')]],
     });
   }
 
@@ -31,10 +36,25 @@ export class ProfileComponent {
     }
   }
 
-  onSaveProfile() {
+  async onSaveProfile() {
     if (this.profileForm.valid) {
-      this.userService.updateCurrentUser(this.profileForm.value); // Método en el servicio para actualizar el usuario
-      alert('Perfil actualizado exitosamente.');
+      try {
+        const updatedData = this.profileForm.getRawValue(); // Obtiene los datos incluso si están deshabilitados
+        const response = await this.userService.updateCurrentUser(updatedData); // Llama al servicio
+
+        if (response.state === 'success') {
+          alert('Perfil actualizado exitosamente.');
+        } else {
+          alert(`Error al actualizar el perfil: ${response.data.error}`);
+        }
+      } catch (error: any) {
+        console.log('Error al actualizar el perfil:', error);
+        alert(
+          `Ocurrió un error al actualizar el perfil: ${
+            error.error || 'Error desconocido'
+          }`
+        );
+      }
     }
   }
 }

@@ -3,11 +3,11 @@
   <h2>Mi Perfil</h2>
   <form [formGroup]="profileForm" (ngSubmit)="onSaveProfile()">
     <div class="form-group">
-      <label for="email">Correo Electrónico</label>
+      <label for="correo">Correo Electrónico</label>
       <input
-        type="email"
-        id="email"
-        formControlName="email"
+        type="correo"
+        id="correo"
+        formControlName="correo"
         class="form-control"
         readonly
       />

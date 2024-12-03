@@ -1,0 +1,82 @@
+<app-nav-bar></app-nav-bar>
+<div class="container mt-5">
+  <h2>Usuarios - Rol Cliente</h2>
+
+  <div *ngIf="loading" class="text-center">
+    <p>Cargando usuarios...</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <table *ngIf="!loading && !errorMessage" class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Correo</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Dirección</th>
+        <th>Teléfono</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.correo }}</td>
+        <td>{{ user.nombre }}</td>
+        <td>{{ user.apellido }}</td>
+        <td>{{ user.direccion }}</td>
+        <td>{{ user.telefono }}</td>
+        <td>
+          <button class="btn btn-danger btn-sm" (click)="deleteUser(user.id)">
+            Eliminar
+          </button>
+          <button
+            class="btn btn-info btn-sm"
+            (click)="viewUserPurchases(user.id)"
+          >
+            Ver Compras
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal Genérico -->
+  <app-modal
+    [isVisible]="isModalVisible"
+    [title]="modalTitle"
+    (close)="closeModal()"
+  >
+    <table *ngIf="purchases.length > 0" class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID Compra</th>
+          <th>Fecha</th>
+          <th>Total</th>
+          <th>Estado</th>
+          <th>Detalles</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let purchase of purchases">
+          <td>{{ purchase.idCompra }}</td>
+          <td>{{ purchase.fechaCompra }}</td>
+          <td>{{ purchase.total | currency }}</td>
+          <td>{{ purchase.estado }}</td>
+          <td>
+            <ul>
+              <li *ngFor="let detail of purchase.detalles">
+                {{ detail.cantidad }}x {{ detail.producto.nombre }} -
+                {{ detail.subtotal | currency }}
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </app-modal>
+</div>

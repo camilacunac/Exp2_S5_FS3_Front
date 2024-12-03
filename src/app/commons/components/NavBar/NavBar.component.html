@@ -25,8 +25,14 @@
     <!-- Enlaces alineados a la derecha -->
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav">
+        <li *ngIf="isLoggedIn && isAdmin" class="nav-item">
+          <a class="nav-link" href="/usuarios">Panel de usuarios</a>
+        </li>
         <li *ngIf="isLoggedIn" class="nav-item">
           <a class="nav-link" href="/perfil">Mi Perfil</a>
+        </li>
+        <li *ngIf="!isLoggedIn" class="nav-item">
+          <a class="nav-link" href="/registro">Registro</a>
         </li>
         <li class="nav-item">
           <a class="nav-link font-weight-bold" href="/login" *ngIf="!isLoggedIn"

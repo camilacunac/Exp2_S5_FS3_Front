@@ -1,0 +1,23 @@
+:host {
+  display: block;
+}
+.container {
+  padding: 20px;
+  border-radius: 5px;
+  display: flex;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+}
+
+thead {
+  background: #f8f9fa;
+}

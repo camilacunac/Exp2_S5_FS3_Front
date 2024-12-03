@@ -1,0 +1,11 @@
+<div class="modal-backdrop" *ngIf="isVisible" (click)="closeModal()"></div>
+<div class="modal-container" *ngIf="isVisible">
+  <div class="modal-header">
+    <h3>{{ title }}</h3>
+    <button class="close-btn" (click)="closeModal()">&times;</button>
+  </div>
+  <div class="modal-body">
+    <ng-content></ng-content>
+    <!-- Renderiza contenido dinámico -->
+  </div>
+</div>
